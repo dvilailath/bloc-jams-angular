@@ -36,7 +36,7 @@
      position: relative;
      padding: 2rem;
      text-align: center;
-     opacity: 0;
+     opacity: 1;
      -webkit-transform: scale(0.9) translateY(3rem);
      -moz-transform: scale(0.9) translateY(3rem);
      transform: scale(0.9) translateY(3rem);
