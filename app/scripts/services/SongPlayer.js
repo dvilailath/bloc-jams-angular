@@ -24,22 +24,32 @@
         
          /**
          * @function playSong
-         * @desc Plays a song that is paused and resumes currently playing song and currentBuzzObject;
+         * @desc Plays a song
          * @param {Object} song
          */
          var playSong = function(song) {
              currentBuzzObject.play();
              song.playing = true;
          }
+         
+         /**
+         * @function stopSong
+         * @desc Stops a song
+         * @param {Object} song
+         */
+         var stopSong = function(song) {
+             currentBuzzObject.stop();
+             SongPlayer.currentSong.playing = null;
+         }
          /**
          * @function setSong
          * @desc Stops currently playing song and loads new audio file as currentBuzzObject
          * @param {Object} song
          */
+         
          var setSong = function(song) {
             if (currentBuzzObject) {
-                currentBuzzObject.stop();
-                SongPlayer.currentSong.playing = null;
+                stopSong(song);
             }
 
             currentBuzzObject = new buzz.sound(song.audioUrl, {
@@ -93,8 +103,26 @@
             currentSongIndex--;
              
             if (currentSongIndex < 0) {
-                currentBuzzObject.stop();
-                SongPlayer.currentSong.playing = null;
+                stopSong(song);
+            } else {
+                var song = currentAlbum.songs[currentSongIndex];
+                setSong(song);
+                playSong(song);
+            }
+         };
+         
+         /**
+         * @function SongPlayer.next
+         * @desc Next song is played incrementing current song index and stops if no song is next
+         * @param {Object} song
+         */
+         SongPlayer.next = function() {
+            var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+            currentSongIndex++;
+            
+            if (currentSongIndex >= currentAlbum.songs.length) {
+                //set curretSongIndex to 0 if you don't want song to stop
+                stopSong(song);
             } else {
                 var song = currentAlbum.songs[currentSongIndex];
                 setSong(song);
