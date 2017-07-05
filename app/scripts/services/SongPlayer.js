@@ -62,7 +62,7 @@
                  SongPlayer.currentTime = currentBuzzObject.getTime();
                 });
             });
-
+            
             SongPlayer.currentSong = song;
          };
          
@@ -77,6 +77,12 @@
          * @type {Number}
          */
          SongPlayer.currentTime = null;
+         
+         /**
+         * @desc Current volume to be set
+         * @type {Number}
+         */
+         SongPlayer.volume = 80;
          
          /**
          * @function play
@@ -150,6 +156,18 @@
          SongPlayer.setCurrentTime = function(time) {
              if (currentBuzzObject) {
                  currentBuzzObject.setTime(time);
+             }
+         };
+         
+         /**
+         * @function setVolume
+         * @desc Set volume of seekBar
+         * @param {Number} volume
+         */
+         SongPlayer.setVolume = function(volume) {
+             if (currentBuzzObject) {
+                 currentBuzzObject.setVolume(volume);
+                 console.log(volume);
              }
          };
 
